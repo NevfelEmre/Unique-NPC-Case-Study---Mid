@@ -22,6 +22,13 @@ protected:
 
 	virtual void Interact() override;
 
+	UFUNCTION()
+	void TurnToPlayer(float DeltaTime);
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool LookAtPlayer = 0;
+	UPROPERTY()
+	AActor* Player = nullptr;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
