@@ -23,13 +23,12 @@ void ACustomer::BeginPlay()
 void ACustomer::Interact()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("Interacted"));
-	
-	LookAtPlayer = !LookAtPlayer;
+	bLookAtActor = !bLookAtActor;
 }
 
-void ACustomer::TurnToPlayer(float DeltaTime)
+void ACustomer::TurnToActor(AActor* Actor, float DeltaTime)
 {
-	if (LookAtPlayer)
+	if (bLookAtActor)
 	{
 		SetActorRotation(
 			UKismetMathLibrary::RInterpTo(GetActorRotation(), 
@@ -42,7 +41,7 @@ void ACustomer::TurnToPlayer(float DeltaTime)
 void ACustomer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	TurnToPlayer(DeltaTime);
+	TurnToActor(Player, DeltaTime);
 }
 
 // Called to bind functionality to input

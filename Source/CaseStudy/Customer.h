@@ -23,10 +23,10 @@ protected:
 	virtual void Interact() override;
 
 	UFUNCTION()
-	void TurnToPlayer(float DeltaTime);
+	void TurnToActor(AActor* Actor,float DeltaTime);
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	bool LookAtPlayer = 0;
+	bool bLookAtActor = 0;
 	UPROPERTY()
 	AActor* Player = nullptr;
 public:	

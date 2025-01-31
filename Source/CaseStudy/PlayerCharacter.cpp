@@ -19,25 +19,27 @@ void APlayerCharacter::BeginPlay()
 	
 }
 
-void APlayerCharacter::MakeInteraction(USceneComponent* Camera)
+bool APlayerCharacter::MakeInteraction(USceneComponent* Camera)
 {
 	FHitResult Hit;
 	const float LineTraceRange = 1000.0f;
 	const FVector Start = Camera->GetComponentLocation();
 	const FVector End = (Camera->GetForwardVector() * LineTraceRange) + Camera->GetComponentLocation();
 	const bool hitSuccess = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECollisionChannel::ECC_Visibility);
-	DrawDebugLine(
+	/*DrawDebugLine(
 		GetWorld(),
 		Start,
-		Hit.Location,
+		End,
 		FColor(255, 0, 0),
-		false, 5, 0, 0.5f);
+		false, 5, 0, 0.5f);*/
 	if (hitSuccess) {
 		IInteractable* InteractActor = Cast<IInteractable>(Hit.GetActor());
-		if (InteractActor)
+		if (InteractActor) {
 			InteractActor->Interact();
+			return 1;
+		}
 	}
-
+	return 0;
 }
 
 // Called every frame
