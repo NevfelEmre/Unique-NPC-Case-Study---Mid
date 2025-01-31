@@ -20,7 +20,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable, Category = "C++ Functions")
-	bool MakeInteraction(USceneComponent* Camera);
+	AActor* MakeInteraction(USceneComponent* Camera);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

@@ -22,7 +22,7 @@ void ACustomer::BeginPlay()
 
 void ACustomer::Interact()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("Interacted"));
+	//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("Interacted"));
 	bLookAtActor = !bLookAtActor;
 }
 
@@ -30,9 +30,10 @@ void ACustomer::TurnToActor(AActor* Actor, float DeltaTime)
 {
 	if (bLookAtActor)
 	{
+		FRotator TargetRot = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), Player->GetActorLocation());
 		SetActorRotation(
 			UKismetMathLibrary::RInterpTo(GetActorRotation(), 
-				UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), Player->GetActorLocation()),
+				FRotator(GetActorRotation().Pitch, TargetRot.Yaw, GetActorRotation().Roll),
 				DeltaTime, 5.0f));
 	}
 }

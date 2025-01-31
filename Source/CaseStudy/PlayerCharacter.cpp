@@ -19,7 +19,7 @@ void APlayerCharacter::BeginPlay()
 	
 }
 
-bool APlayerCharacter::MakeInteraction(USceneComponent* Camera)
+AActor* APlayerCharacter::MakeInteraction(USceneComponent* Camera)
 {
 	FHitResult Hit;
 	const float LineTraceRange = 1000.0f;
@@ -36,10 +36,10 @@ bool APlayerCharacter::MakeInteraction(USceneComponent* Camera)
 		IInteractable* InteractActor = Cast<IInteractable>(Hit.GetActor());
 		if (InteractActor) {
 			InteractActor->Interact();
-			return 1;
+			return Hit.GetActor();
 		}
 	}
-	return 0;
+	return nullptr;
 }
 
 // Called every frame
